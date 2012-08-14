@@ -1,0 +1,14 @@
+extends ../layout/layout
+
+block content
+  article
+    div.header
+      div.title=article.header.title
+      div.date=article.header.date
+      div.tags
+        if article.header.tags
+          ul
+            for tag in article.header.tags
+              li
+                a(href='/tag/#{tag}')= tag
+    div.body !{article.body}
