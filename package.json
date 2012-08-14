@@ -5,11 +5,11 @@
     "url": "http://www.revgum.com"
   },
   "name": "janked",
-  "version": "0.1",
-  "description": "Heroku friendly node blog using markdown files, originally inspired by toto."
+  "version": "0.0.1",
+  "description": "Heroku friendly node blog using markdown files, originally inspired by toto.",
   "private": true,
   "dependencies": {
-    "express": "3.0.x",
+    "express": "3.0.0rc2",
     "consolidate": "0.4.0",
     "MD5": "1.0.0",
     "jade": "0.27.2",
