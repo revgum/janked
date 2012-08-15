@@ -13,7 +13,12 @@ var express = require('express')
 , cons = require('consolidate')
 , error = require(__dirname + '/lib/error_handler.js');
 
+
 var app = module.exports = express();
+
+if(process.argv.length == 3){
+  app.settings.env = process.argv[2];
+}
 
 // Configuration
 app.engine('.jade', cons.jade);
