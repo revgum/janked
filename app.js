@@ -26,11 +26,11 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-app.use(express.static(__dirname + '/public'));
 app.use(app.router);
 
 app.configure('development', function(){
   app.use(error({dumpExceptions: true, showStack: true, showMessage: true, targetView: __dirname + '/views/error/500.jade'}));
+  app.use(express.static(__dirname + '/public'));
 });
 
 app.configure('production', function(){
