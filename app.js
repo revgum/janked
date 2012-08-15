@@ -40,6 +40,9 @@ app.configure('production', function(){
 });
 
 // Routes
+app.get('/about', function(req, res) {
+  res.render('../views/about/me');
+});
 app.get('/log', routes.log);
 app.get('/article/:article_id', routes.article.read);
 app.get('/tag/:tag_id', routes.tag.tagged);
