@@ -34,7 +34,9 @@ app.configure('development', function(){
 });
 
 app.configure('production', function(){
+  var oneYear = 31557600000;
   app.use(error({dumpExceptions: true, targetView: __dirname + '/views/error/500.jade'}));
+  app.use(express.static(__dirname + '/public', { maxAge: oneYear }));
 });
 
 // Routes
