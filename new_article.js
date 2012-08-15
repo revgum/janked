@@ -29,16 +29,24 @@ var tags = [];
 rl.question("Enter a title:", function(s){
   title = s;
   file_title = s.replace(/\s+/g, "-").replace(/['\",!\.&]/g, "");
-  rl.close();
-  rl.question("Enter tags separted by commas:", function(s){
+  
+  rl.setPrompt("Enter tags separated by commas:");
+  rl.prompt();
+  rl.on('line', function(s){
     s = s.replace(/\s*/g,"");
-    tags = s.split(",");
+    if(s.length == 0){
+      console.log("\nNo tags entered.\nAdd \"tags: ['tag','another','etc']\" before the '___' article separator if you change your mind.");
+    }
+    else {
+      tags = s.split(",");
+    }
+
     rl.close();
 
-    var contents = util.format("---\ntitle: %s\ndate: %s\n%s\n___\n"
+    var contents = util.format("---\ntitle: %s\ndate: %s\n%s___\n"
       , title
       , date
-      , (tags.length > 0 ? "tags: [\"" + tags.join("\",\"") + "\"]" : "")
+      , (tags.length > 0 ? "tags: [\"" + tags.join("\",\"") + "\"]\n" : "")
     );
 
     var file_path = util.format("%s/articles/%s-%s.txt", __dirname, file_date, file_title);
@@ -46,7 +54,7 @@ rl.question("Enter a title:", function(s){
       if(err){
         throw err;
       }
-      console.log("Your article '%s' has been created!", file_path);
+      console.log("\n\nYour article '%s' has been created, go write some Markdown and publish that thing!", file_path);
       process.exit(code=0);
     });
   });

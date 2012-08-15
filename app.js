@@ -10,13 +10,13 @@ var express = require('express')
     , tag: require(__dirname + '/routes/tag.js')
   }
 , jade = require('jade')
-, cons = require('consolidate');
+, cons = require('consolidate')
+, error = require(__dirname + '/lib/error_handler.js');
 
 var app = module.exports = express();
 
 // Configuration
 app.engine('.jade', cons.jade);
-
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.bodyParser());
@@ -24,13 +24,12 @@ app.use(express.methodOverride());
 app.use(express.static(__dirname + '/public'));
 app.use(app.router);
 
-
 app.configure('development', function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+  app.use(error({dumpExceptions: true, showStack: true, showMessage: true, targetView: __dirname + '/views/error/500.jade'}));
 });
 
 app.configure('production', function(){
-  app.use(express.errorHandler());
+  app.use(error({dumpExceptions: true, targetView: __dirname + '/views/error/500.jade'}));
 });
 
 // Routes
@@ -38,8 +37,6 @@ app.get('/log', routes.log);
 app.get('/article/:article_id', routes.article.read);
 app.get('/tag/:tag_id', routes.tag.tagged);
 app.get('/', routes.index);
-
-
 
 var port = process.env.PORT || 3000;
 var server = app.listen(port);
