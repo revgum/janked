@@ -11,13 +11,17 @@ var express = require('express')
   }
 , jade = require('jade')
 , cons = require('consolidate')
-, error = require(__dirname + '/lib/error_handler.js');
+, error = require(__dirname + '/lib/error_handler.js')
+, config = require('./config');
 
 
 var app = module.exports = express();
 
+// take the environment from the commandline for Heroku (Procfile), or use the config for backup
 if(process.argv.length == 3){
   app.settings.env = process.argv[2];
+} else {
+  app.settings.env = config.web.environment;
 }
 
 // Configuration
@@ -34,9 +38,8 @@ app.configure('development', function(){
 });
 
 app.configure('production', function(){
-  var oneYear = 31557600000;
   app.use(error({dumpExceptions: true, targetView: __dirname + '/views/error/500.jade'}));
-  app.use(express.static(__dirname + '/public', { maxAge: oneYear }));
+  app.use(express.static(__dirname + '/public', { maxAge: config.web.cache_for_seconds }));
 });
 
 // Routes
@@ -48,6 +51,5 @@ app.get('/article/:article_id', routes.article.read);
 app.get('/tag/:tag_id', routes.tag.tagged);
 app.get('/', routes.index);
 
-var port = process.env.PORT || 3000;
-var server = app.listen(port);
+var server = app.listen(config.web.port);
 console.log("Express server listening on port %d in %s mode", server.address().port, app.settings.env);

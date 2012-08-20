@@ -1,7 +1,8 @@
 var fs = require('fs')
 , markdown = require('marked')
 , _ = require('underscore')
-, parser = require('../lib/article_parser');
+, parser = require('../lib/article_parser')
+, config = require('../config');
 /*
  * GET article page.
  */
@@ -12,6 +13,8 @@ module.exports = {
     article.body = markdown(article.body); 
 
     res.locals.article = article;
+    res.locals.disqus = config.disqus;
+    res.locals.host_name = config.web.host_name;
     res.render('../views/article/read');
   }
 };

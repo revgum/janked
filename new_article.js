@@ -1,6 +1,7 @@
 var fs = require('fs')
 , readline = require('readline')
-, util = require('util');
+, util = require('util')
+, config = require('config');
 
 var rl = readline.createInterface({
   input: process.stdin,
@@ -35,7 +36,7 @@ rl.question("Enter a title:", function(s){
   rl.on('line', function(s){
     s = s.replace(/\s*/g,"");
     if(s.length == 0){
-      console.log("\nNo tags entered.\nAdd \"tags: ['tag','another','etc']\" before the '___' article separator if you change your mind.");
+      console.log("\nNo tags entered.\nAdd \"tags: ['tag','another','etc']\" before the '" + config.article.separator + "' article separator if you change your mind.");
     }
     else {
       tags = s.split(",");
@@ -43,10 +44,11 @@ rl.question("Enter a title:", function(s){
 
     rl.close();
 
-    var contents = util.format("---\ntitle: %s\ndate: %s\n%s___\n"
+    var contents = util.format("---\ntitle: %s\ndate: %s\n%s%s\n"
       , title
       , date
       , (tags.length > 0 ? "tags: [\"" + tags.join("\",\"") + "\"]\n" : "")
+      , config.article.separator
     );
 
     var file_path = util.format("%s/articles/%s-%s.txt", __dirname, file_date, file_title);
