@@ -51,5 +51,6 @@ app.get('/article/:article_id', routes.article.read);
 app.get('/tag/:tag_id', routes.tag.tagged);
 app.get('/', routes.index);
 
-var server = app.listen(config.web.port);
+var port = process.env.PORT || config.web.port;
+var server = app.listen(port);
 console.log("Express server listening on port %d in %s mode", server.address().port, app.settings.env);
