@@ -12,6 +12,7 @@ module.exports = {
     var article = parser.parse(id + ".txt");
     article.body = markdown(article.body); 
 
+    res.locals.blog = config.blog;
     res.locals.article = article;
     res.locals.disqus = config.disqus;
     res.locals.host_name = config.web.host_name;
