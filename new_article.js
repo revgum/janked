@@ -1,7 +1,7 @@
 var fs = require('fs')
 , readline = require('readline')
 , util = require('util')
-, config = require('config');
+, config = require('./config');
 
 var rl = readline.createInterface({
   input: process.stdin,
