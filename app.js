@@ -44,6 +44,7 @@ app.configure('production', function(){
 
 // Routes
 app.get('/about', function(req, res) {
+  res.locals.blog = config.blog;
   res.render('../views/about/me');
 });
 app.get('/log', routes.log);
