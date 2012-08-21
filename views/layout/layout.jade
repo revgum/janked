@@ -6,17 +6,18 @@ append head
 block header
   div#header-wrapper
     div#header-left
-      a.prominent(href="/") revgum.com
+      a.prominent(href="/") #{blog.header_text}
       &nbsp;
       a(href="/about") about
       &nbsp;
       a(href="/log") log
     div#header-right
-      a(href="http://www.twitter.com/revgum") @revgum
+      a(href="http://www.twitter.com/#{blog.twitter_handle}") @#{blog.twitter_handle}
       &nbsp;
-      a(href="https://www.github.com/revgum") github/revgum
+      a(href="https://www.github.com/#{blog.github_handle}") github/#{blog.github_handle}
 
 block footer
   div#footer-wrapper 
-    span Inspired by 
-    a(href="#") toto
+    span a  
+    a(href="https://www.github.com/revgum/janked") janked
+    span  blog

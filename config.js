@@ -15,6 +15,9 @@ config.disqus.short_name = "yourshortname";
 config.article.summary_length = 50;
 config.article.separator = "___";
 
-config.blog.title = "My Blog!"
+config.blog.title = "www.yoursite.com - Blog"
+config.blog.header_text = "My Blog"
+config.blog.twitter_handle = "twitter-id"
+config.blog.github_handle = "github-id"
 
 module.exports = config;
