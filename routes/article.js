@@ -1,8 +1,7 @@
 var fs = require('fs')
 , markdown = require('marked')
 , _ = require('underscore')
-, parser = require('../lib/article_parser')
-, config = require('../config');
+, parser = require('../lib/article_parser');
 /*
  * GET article page.
  */
@@ -12,10 +11,7 @@ module.exports = {
     var article = parser.parse(id + ".txt");
     article.body = markdown(article.body); 
 
-    res.locals.blog = config.blog;
     res.locals.article = article;
-    res.locals.disqus = config.disqus;
-    res.locals.host_name = config.web.host_name;
-    res.render('../views/article/read');
+    res.render_mobile('../views/article/read');
   }
 };

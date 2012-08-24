@@ -2,8 +2,7 @@ var fs = require('fs')
 , markdown = require('marked')
 , _ = require('underscore')
 , reader = require('../lib/article_reader')
-, parser = require('../lib/article_parser')
-, config = require('../config');
+, parser = require('../lib/article_parser');
 /*
  * GET tag page.
  */
@@ -24,7 +23,6 @@ module.exports = {
         }
       }
     });
-    res.locals.blog = config.blog;
     res.locals.articles = a;
     res.render('../views/tag/list');
   }

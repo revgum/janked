@@ -1,0 +1,31 @@
+extends ../layout/layout-mobile
+
+block content
+  article
+    div.header
+      div.title=article.header.title
+      div.date=article.header.date
+      div.tags
+        if article.header.tags
+          ul
+            for tag in article.header.tags
+              li
+                a(href='/tag/#{tag}')= tag
+    div.body !{article.body}
+    - if(disqus.short_name.length)
+      div#disqus_thread
+      a.dsq-brlink(href="http://disqus.com") 
+        blog comments powered by 
+        span.logo-disqus Disqus
+      script
+        var disqus_shortname = '#{disqus.short_name}';
+        var disqus_identifier = '#{article.link}';
+        var disqus_url = 'http://#{host_name}/article/#{article.link}';
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      noscript
+        Please enable JavaScript to view the 
+        a(href="http://disqus.com/?ref_noscript") comments powered by Disqus.

@@ -1,0 +1,23 @@
+extends base-mobile
+
+append head
+  title #{blog.title} Mobile
+
+block header
+  div#header-wrapper
+    div#header-left
+      a.prominent(href="/") #{blog.header_text}
+      &nbsp;
+      a(href="/about") about
+      &nbsp;
+      a(href="/log") log
+    div#header-right
+      a(href="http://www.twitter.com/#{blog.twitter_handle}") @#{blog.twitter_handle}
+      &nbsp;
+      a(href="https://www.github.com/#{blog.github_handle}") github/#{blog.github_handle}
+
+block footer
+  div#footer-wrapper 
+    span a  
+    a(href="https://www.github.com/revgum/janked") janked
+    span  blog

@@ -1,0 +1,11 @@
+extends ../layout/layout-mobile
+
+block content
+  if articles
+    ul
+      for article in articles
+        li 
+          a(href='/article/#{article.link}')= article.header.title
+          span= article.header.date
+  else
+    p No articles!

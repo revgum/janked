@@ -1,5 +1,4 @@
-var reader = require('../lib/article_reader')
-, config = require('../config');
+var reader = require('../lib/article_reader');
 
 function getClientIp(req) {
   
@@ -30,8 +29,7 @@ exports.index = function(req, res) {
   var client_ip = getClientIp(req);
   var articles = reader.get_sorted_articles('descending', 3);
   console.log("%s articles found.", articles.length);
-  res.locals.blog = config.blog;
   res.locals.articles = articles;
   res.locals.client_ip = client_ip;
-  res.render('../views/home/index');
+  res.render_mobile('../views/home/index');
 };
